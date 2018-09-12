@@ -1,19 +1,18 @@
 module.exports = function (RED) {
   'use strict';
 
-  var Verisure = require('verisure');
   // var http = require('http');
   // var url = require('url');
 
   function VerisureNode (config) {
-    RED.nodes.createNode(this, config); 
+    RED.nodes.createNode(this, config);
 
     // initial config of the node  ///
     var node = this;
     // Retrieve the config node
     try {
-    // node.fh_user = RED.nodes.getNode(n.user); 
-      this.verUser = RED.nodes.getNode(config.user); 
+    // node.fh_user = RED.nodes.getNode(n.user);
+      this.verUser = RED.nodes.getNode(config.user);
     } catch (err) {
       this.error('Error, no login node verisure.js l18: ' + err);
     }
@@ -23,8 +22,6 @@ module.exports = function (RED) {
       return;
     }
 
-    // Verisure setup
-    var verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
     // verisure.request.defaults({ jar: false });
     var lastStatus = 'test1';
     var currentStatus = 'test';
@@ -34,6 +31,9 @@ module.exports = function (RED) {
     // what to do with payload incoming ///
     this.on('input', function (msg) {
       this.status({ fill: 'red', shape: 'ring', text: 'fetching' });
+      // Verisure setup (moved to on-input creation of the object, reuse across events trigger an auth error from Verisure)
+      var Verisure = require('verisure');
+      var verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       // add input validate
 
       // take action, check status
