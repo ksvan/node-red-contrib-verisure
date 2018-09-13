@@ -3,12 +3,13 @@
 This module provides two nodes, one config and one function node, to fetch the status of a Verisure site.
 The module and it's dependencies is strictly unofficial, not supported in any way by Verisure AS (and use is probably not encouraged by them)
 
-## Install
+## Install (to come)
 
-To install 
+(not yet published) To install 
 To install the stable version use the `Menu - Manage palette` option and search for `node-red-contrib-verisure`, or run the following command in your Node-RED user directory (typically `~/.node-red`):
 
 	$ npm i node-red-contrib-verisure
+Or, to install, download the files to a local folder, same structure. Switch to your .node-red directory and use npm link or npm install
 
 ## Dependencies
 
