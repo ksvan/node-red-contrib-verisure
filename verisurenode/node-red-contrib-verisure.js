@@ -1,9 +1,6 @@
 module.exports = function (RED) {
   'use strict';
 
-  // var http = require('http');
-  // var url = require('url');
-
   function VerisureNode (config) {
     RED.nodes.createNode(this, config);
 
@@ -11,30 +8,28 @@ module.exports = function (RED) {
     var node = this;
     // Retrieve the config node
     try {
-    // node.fh_user = RED.nodes.getNode(n.user);
       this.verUser = RED.nodes.getNode(config.user);
     } catch (err) {
-      this.error('Error, no login node verisure.js l18: ' + err);
+      this.error('Error, no login node verisure.js l-13: ' + err);
+      this.debug('Couldnt get config node : ' + this.verUser);
     }
 
     if (!node.verUser || !node.verUser.credentials.username || !node.verUser.credentials.password) {
-      this.warn('No credentials given! Missing config node details. Verisure.js l23 :' + node.verUser);
+      this.warn('No credentials given! Missing config node details. Verisure.js l-17 :' + node.verUser);
+
       return;
     }
 
-    // verisure.request.defaults({ jar: false });
     var lastStatus = 'test1';
     var currentStatus = 'test';
-    // var installations;
-    // var overview;
 
     // what to do with payload incoming ///
     this.on('input', function (msg) {
-      this.status({ fill: 'red', shape: 'ring', text: 'fetching' });
+      this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
       // Verisure setup (moved to on-input creation of the object, reuse across events trigger an auth error from Verisure)
       var Verisure = require('verisure');
       var verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
-      // add input validate
+      // todo add input validation
 
       // take action, check status
       verisure.getToken()
@@ -50,16 +45,18 @@ module.exports = function (RED) {
             // Nothing has changed, just return the state as JSON
             currentStatus = { 'currentStatus': currentStatus, 'changed': false };
           }
-
           // return current status, reuse existing object, replace only payload
           msg.payload = currentStatus;
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
+          this.debug("Status fetched : " + currentStatus);
           this.send(msg);
         })
 
         .catch((error) => {
           currentStatus = { 'Error': error };
-          node.error(currentStatus);
+          this.error(currentStatus);
+          this.debug("Error when fetching Verisure status, verisure On msg async use of Verisure package: " + currentStatus);
+          this.status({ fill: 'red', shape: 'ring', text: 'error' });
           this.send(msg);
         });
     });
