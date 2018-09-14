@@ -28,7 +28,9 @@ This is just a credential node, to separate out storage of your credentials and 
 
 This node connects to the first verisure site returned with your username and password. Then fetch the armed or unarmed status. The fetch happens whenever input is recieved. The node changes the payload, but nothing else in the message object. Payload returned is a simple json structure:
 	
-	{'current_status': "armed", 'changed': false}
+	{'current_status': "ARMED_AWAY", 'changed': false}
+	{'current_status': "ARMED_HOME", 'changed': false}
+	{'current_status': "DISARMED", 'changed': false}
 
 # Legal Disclaimer
 
