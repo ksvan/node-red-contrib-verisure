@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('VerisureNode',{
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:"test"},
+            user: {value:"",type:"VerisureConfig", required:true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "file.png",
+        label: function() {
+            return this.name||"VerisureNode";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="VerisureNode">
+    <div class="form-row">
+        <label for="node-input-user"><i class="icon-tag"></i> Credentials </label>
+        <input type="text" id="node-input-user" placeholder="user">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="VerisureNode">
+    <p>A node for interacting with Verisure systems, fetching arm status. On message input, returns value and if it has changed since last time. Only targeting first Verisure site if multiple available for the given user</p><p>Payload format {'current_status': "armed", 'changed': false}</p>
+</script>
