@@ -10,13 +10,12 @@ module.exports = function (RED) {
     try {
       this.verUser = RED.nodes.getNode(config.user);
     } catch (err) {
-      this.error('Error, no login node verisure.js l-13: ' + err);
+      this.error('Error, no login node exists - verisure.js l-13: ' + err);
       this.debug('Couldnt get config node : ' + this.verUser);
     }
 
-    if (!node.verUser || !node.verUser.credentials.username || !node.verUser.credentials.password) {
+    if (typeof node.verUser === 'undefined' || !node.verUser || !node.verUser.credentials.username || !node.verUser.credentials.password) {
       this.warn('No credentials given! Missing config node details. Verisure.js l-17 :' + node.verUser);
-
       return;
     }
 
@@ -48,14 +47,14 @@ module.exports = function (RED) {
           // return current status, reuse existing object, replace only payload
           msg.payload = currentStatus;
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
-          this.debug("Status fetched : " + currentStatus);
+          this.debug('Status fetched : ' + currentStatus);
           this.send(msg);
         })
 
         .catch((error) => {
           currentStatus = { 'Error': error };
           this.error(currentStatus);
-          this.debug("Error when fetching Verisure status, verisure On msg async use of Verisure package: " + currentStatus);
+          this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
           this.send(msg);
         });
