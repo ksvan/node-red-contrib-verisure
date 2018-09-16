@@ -47,14 +47,14 @@ module.exports = function (RED) {
           // return current status, reuse existing object, replace only payload
           msg.payload = currentStatus;
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
-          this.debug('Status fetched : ' + currentStatus);
+          this.debug('Status fetched : ' + currentStatus.payload);
           this.send(msg);
         })
 
         .catch((error) => {
           currentStatus = { 'Error': error };
           this.error(currentStatus);
-          this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus);
+          this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus.payload);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
           this.send(msg);
         });
