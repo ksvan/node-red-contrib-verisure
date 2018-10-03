@@ -44,17 +44,18 @@ module.exports = function (RED) {
             // Nothing has changed, just return the state as JSON
             currentStatus = { 'currentStatus': currentStatus, 'changed': false };
           }
+          lastStatus = overview.armState.statusType;
           // return current status, reuse existing object, replace only payload
           msg.payload = currentStatus;
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
-          this.debug('Status fetched : ' + currentStatus.payload);
+          this.debug('Status fetched : ' + currentStatus);
           this.send(msg);
         })
 
         .catch((error) => {
           currentStatus = { 'Error': error };
           this.error(currentStatus);
-          this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus.payload);
+          this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
           this.send(msg);
         });
