@@ -3,9 +3,9 @@
 This module provides two nodes, one config and one function node, to fetch the status of a Verisure site.
 The module and it's dependencies is strictly unofficial, not supported in any way by Verisure AS (and use is probably not encouraged by them)
 
-## Install (to come)
+## Install
 
-(not yet published) To install 
+To install 
 To install the stable version use the `Menu - Manage palette` option and search for `node-red-contrib-verisure`, or run the following command in your Node-RED user directory (typically `~/.node-red`):
 
 	$ npm i node-red-contrib-verisure
@@ -31,6 +31,8 @@ This node connects to the first verisure site returned with your username and pa
 	{'current_status': "ARMED_AWAY", 'changed': false}
 	{'current_status': "ARMED_HOME", 'changed': false}
 	{'current_status': "DISARMED", 'changed': false}
+
+Verisure node is currently expecting alarm to be in DISARMED state when starting. If not, the first Changed status will be wrong.
 
 # Legal Disclaimer
 
