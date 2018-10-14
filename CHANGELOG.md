@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - potentially extracting key values and statuses other than alarm
 - actual 1.0 release after more test and tweaking
 
+### Added
+- Support for vacation mode
+
 ## 0.3.3
 ### Fixed
 - Bug not returning the correct Changed true/false in the json result put in msg.payload
