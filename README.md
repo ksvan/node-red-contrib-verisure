@@ -26,15 +26,21 @@ Depends on verisure package
 
 This is just a credential node, to separate out storage of your credentials and simplify usage of multiple Verisure nodes/actions in the future
 
-### Verisure node
+### Verisure Alarm node
 
 This node connects to the first verisure site returned with your username and password. Then fetch the armed or unarmed status. The fetch happens whenever input is recieved. The node changes the payload, but nothing else in the message object. Payload returned is a simple json structure:
 	
-	{'current_status': "ARMED_AWAY", 'changed': false}
-	{'current_status': "ARMED_HOME", 'changed': false}
-	{'current_status': "DISARMED", 'changed': false}
+	{ 'current_status': "ARMED_AWAY", 'changed': false, 'date': "2016-01-01T00:00:00.000Z", 'name': "John D. Oe" }
+	{ 'current_status': "ARMED_HOME", 'changed': false, 'date': "2016-01-01T00:00:00.000Z", 'name': "John D. Oe"  }
+	{ 'current_status': "DISARMED", 'changed': false, 'date': "2016-01-01T00:00:00.000Z", 'name': "John D. Oe"  }
 
 Verisure node is currently expecting alarm to be in DISARMED state when starting. If not, the first Changed status will be wrong.
+
+### Verisure Sensor Node
+
+This node connects to the first verisure site returned with your username and password. It can then be used to fetch values from named sensor in the site.
+
+TO BE ADDED in this feature branch
 
 # Legal Disclaimer
 

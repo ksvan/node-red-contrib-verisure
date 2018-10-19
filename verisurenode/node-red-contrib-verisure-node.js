@@ -1,7 +1,7 @@
 module.exports = function (RED) {
   'use strict';
 
-  function VerisureNode (config) {
+  function VerisureAlarmNode (config) {
     RED.nodes.createNode(this, config);
 
     // initial config of the node  ///
@@ -19,7 +19,7 @@ module.exports = function (RED) {
       return;
     }
 
-    var lastStatus = 'test1';
+    var lastStatus = 'DISARMED';
     var currentStatus = 'test';
 
     // what to do with payload incoming ///
@@ -39,10 +39,10 @@ module.exports = function (RED) {
           // Fix code, adapt to nodered
           if (currentStatus !== lastStatus) {
             // Update Webtask Storage with new status
-            currentStatus = { 'currentStatus': currentStatus, 'changed': true };
+            currentStatus = { 'currentStatus': currentStatus, 'changed': true, 'date': overview.date, 'name': overview.name };
           } else {
             // Nothing has changed, just return the state as JSON
-            currentStatus = { 'currentStatus': currentStatus, 'changed': false };
+            currentStatus = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.date, 'name': overview.name };
           }
           lastStatus = overview.armState.statusType;
           // return current status, reuse existing object, replace only payload
@@ -67,7 +67,7 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType('VerisureNode', VerisureNode);
+  RED.nodes.registerType('VerisureAlarmNode', VerisureAlarmNode);
 };
 
 /*
