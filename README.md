@@ -13,13 +13,16 @@ To install the stable version use the `Menu - Manage palette` option and search 
 
 	$ npm i node-red-contrib-verisure
 	
-Or, to install, download the files to a local folder, same structure. Switch to your .node-red directory and use npm link or npm install
+Or, to install, download the files to a local folder, same structure. Switch to your .node-red directory and use npm link or npm install.
+[NPMJS link](https://www.npmjs.com/package/node-red-contrib-verisure)
 
 ## Dependencies
 
 Depends on verisure package
 
 	$ npm install verisure --save
+
+[NPMJS Link](https://www.npmjs.com/package/verisure)
 
 ## Nodes
 
@@ -40,7 +43,7 @@ Verisure node is currently expecting alarm to be in DISARMED state when starting
 ### Verisure Sensor Node
 
 This node connects to the first verisure site returned with your username and password. It can then be used to fetch values from named sensor in the site.
-The node accepts input in json format.
+The node accepts input in json format. Only one identificator needs to be given/will be used. index, area or label, will be tried in that order.
 
 	{'type': "climate", 'label': "2RTL M7"} // returns sensor data from this device
 	{'type': "climate", 'index': 4} // returns sensor data from this device, number 4 in array list
@@ -52,7 +55,6 @@ The node accepts input in json format.
 
 You will find all indexes and labels if you output a fill site object and look through it. Note that access by index will be faster. The node always reaches out to get new data from Verisure.
 
-TO BE ADDED in this feature branch
 
 #### Return objects
 Climate: {"deviceLabel":"2ZEL TMP","deviceArea":"Gang","deviceType":"SMOKE2","temperature":21.9,"humidity":40,"time":"2018-10-19T17:51:54.000Z"}
