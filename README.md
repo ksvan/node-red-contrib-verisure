@@ -44,6 +44,7 @@ The node accepts input in json format.
 
 	{'type': "climate", 'label': "2RTL M7"} // returns sensor data from this device
 	{'type': "climate", 'index': 4} // returns sensor data from this device, number 4 in array list
+	{'type': "climate", 'area': "Master Bedroom"} // returns sensor data from this device area
 	{'type': "lock", 'label': "2YGL M8"} // returns lock data from this device
 	{'type': "lock", 'index': 5} // returns lock data from this device
 	{'type': "doorwindow", 'index': 5} // returns door or window state data from this device
@@ -60,6 +61,8 @@ Doorlock: {"deviceLabel":"2ZF7 SFG","area":"Hoveddør","userString":"Tor","metho
 
 DoorWindow: {"deviceLabel":"2JRY 4WTH","area":"Inngang","state":"CLOSE","wired":false,"reportTime":"2018-10-19T17:34:00.000Z"}
 
+Error: { 'Error': true, 'message': 'No such device' }
+
 # Security
 Verisure system is quite secure as such, but care should be taken on your side as well when integrating. Node-red should be set up with your custom encryption key, that will be used for securing credentials. This is done by setting the credentialSecret key in the node-red settings files. 
 You should also consider setting up a specific user account on your verisure site, used only for integration, with as few rights as possible.
@@ -69,6 +72,8 @@ Not many common issues known at this point.
 - If you pull to often from Verisure, they will throttle your requests.
 - It seems like use of the same account for this node and the verisure App might log you out of the app.
 - Breaking change in version 0.4, node-red will complain about missing VerisureNode. You need to replace this in your flows with the new VerisureAlarmnode
+- And by the way, do not expect that your installation company managed to keep naming standards consistent. Area for your main door lock and your main door open/closed sensor might be different...
+- When working with the site object, note that naming standards in the objects properties are inconsistent, from the Verisure package, probably inherited from the Verisure apis/datamodel. For instance is area and devicearea properties used alternating.
 
 # Legal Disclaimer
 

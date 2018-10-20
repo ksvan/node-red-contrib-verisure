@@ -33,6 +33,7 @@ module.exports = function (RED) {
         .then(installations => installations[0].getOverview())
         .then((overview) => {
           // switch on the node-red payload to figure what to do
+          this.debug('type of :' + typeof overview);
           switch (msg.payload.type) {
             case 'site':
               currentReadings = overview;
@@ -45,6 +46,9 @@ module.exports = function (RED) {
               break;
             case 'doorWindow':
               currentReadings = doorWindowGet(msg, overview);
+              break;
+            default:
+              currentReadings = { 'Error': true, 'message': 'No such type: ' + msg.payload.type };
               break;
           }
 
@@ -73,19 +77,60 @@ module.exports = function (RED) {
   // Function for parsing arguments and fetching ordered climate sensor data
   function climateGet (msg, overview) {
     if (typeof msg.payload.index === 'number') {
-      return overview.climateValues[msg.payload.index];
+      let index = msg.payload.index;
+      return overview.climateValues[index] || { 'Error': true, 'message': 'No such device with index: ' + index };
+    }
+    else if (typeof msg.payload.area === 'string' && msg.payload.area !== '') {
+      let area = msg.payload.area;
+      return findByArea(overview.climateValues, area) || { 'Error': true, 'message': 'No such device with name: ' + area };
+    }
+    else if (typeof msg.payload.label === 'string' && msg.payload.label !== '') {
+      let label = msg.payload.label;
+      return findByLabel(overview.climateValues, label) || { 'Error': true, 'message': 'No such device with label: ' + label };
     }
   }
 
   // Function for parsing arguments and fetching ordered lock data
   function lockGet (msg, overview) {
-
+    if (typeof msg.payload.index === 'number') {
+      let index = msg.payload.index;
+      return overview.doorLockStatusList[index] || { 'Error': true, 'message': 'No such lock device with index: ' + index };
+    }
+    else if (typeof msg.payload.area === 'string' && msg.payload.area !== '') {
+      let area = msg.payload.area;
+      return findByArea(overview.doorLockStatusList, area) || { 'Error': true, 'message': 'No such lock device with name: ' + area };
+    }
   }
 
   // Function for parsing arguments and fetching ordered lock data
-  function doorWindowGet(msg, overview){
-
+  function doorWindowGet (msg, overview) {
+    if (typeof msg.payload.index === 'number') {
+      let index = msg.payload.index;
+      return overview.doorWindow.doorWindowDevice[index] || { 'Error': true, 'message': 'No such doorWindows device with index: ' + index };
+    }
+    else if (typeof msg.payload.area === 'string' && msg.payload.area !== '') {
+      let area = msg.payload.area;
+      return findByArea(overview.doorWindow.doorWindowDevice, area) || { 'Error': true, 'message': 'No such doorWindows device with name: ' + area };
+    }
   }
+
+  // loop through and return based on area, mitigate for inconsistence in verisure datamodel
+  function findByArea (collection, string) {
+    let area = '';
+    for (var item in collection) {
+      area = collection[item].deviceArea || collection[item].area;
+      if (area === string) { return collection[item]; }
+    }
+  }
+  // loop through and return based on area, mitigate for inconsistence in verisure datamodel
+  function findByLabel (collection, string) {
+    let label = '';
+    for (var item in collection) {
+      if (collection[item].deviceLabel === string) { return collection[item]; }
+    }
+  }
+
+
 
   RED.nodes.registerType('VerisureSensorNode', VerisureSensorNode);
 };
