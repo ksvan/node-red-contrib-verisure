@@ -32,10 +32,23 @@ module.exports = function (RED) {
         .then(() => verisure.getInstallations())
         .then(installations => installations[0].getOverview())
         .then((overview) => {
-          // let sensor = overview[]
-          // loop to find correct sensor and return value. Otherwise, return the complete list of objects, as json
+          // switch on the node-red payload to figure what to do
+          switch (msg.payload.type) {
+            case 'site':
+              currentReadings = overview;
+              break;
+            case 'climate':
+              currentReadings = climateGet(msg, overview);
+              break;
+            case 'lock':
+              currentReadings = lockGet(msg, overview);
+              break;
+            case 'doorWindow':
+              currentReadings = doorWindowGet(msg, overview);
+              break;
+          }
 
-          currentReadings = overview;
+          // Close up and return
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
           this.debug('Status fetched : ' + currentReadings);
           msg.payload = currentReadings;
@@ -55,6 +68,23 @@ module.exports = function (RED) {
     this.on('close', function () {
 
     });
+  }
+
+  // Function for parsing arguments and fetching ordered climate sensor data
+  function climateGet (msg, overview) {
+    if (typeof msg.payload.index === 'number') {
+      return overview.climateValues[msg.payload.index];
+    }
+  }
+
+  // Function for parsing arguments and fetching ordered lock data
+  function lockGet (msg, overview) {
+
+  }
+
+  // Function for parsing arguments and fetching ordered lock data
+  function doorWindowGet(msg, overview){
+
   }
 
   RED.nodes.registerType('VerisureSensorNode', VerisureSensorNode);

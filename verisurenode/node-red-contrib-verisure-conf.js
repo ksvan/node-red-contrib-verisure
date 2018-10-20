@@ -5,6 +5,8 @@ module.exports = function (RED) {
     var node = this;
     this.username = config.username;
     this.password = config.password;
+    this.siteName = config.siteName;
+    this.displayName = config.displayName;
   }
   RED.nodes.registerType('VerisureConfig', VerisureConfig, {
     credentials: {

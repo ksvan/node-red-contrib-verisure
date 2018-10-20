@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - actual 1.0 release after more test and tweaking
 - support for picking which alarm site for a given user to connect to
+- support for fetching data from multiple sensors, return array
+- separate lock node for specific flows and simplicity
+- separate node for site info, full object. Cached and real time mode, specify or force refresh
+- work more on code structure and abstractions
 
 ### Added
 - Support for vacation mode
@@ -20,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Former Verisurenode is now VerisureAlarm node, only fetching alarm status [BREAKING change]
 - Return object on alarm status contains more data, date for changed status and which user authorized it
+- Changed node category to Verisure, as number of nodes grows
 
 ## 0.3.3
 ### Fixed

@@ -3,14 +3,14 @@
         category: 'config',
         defaults: {
             displayName: {value:"Verisure Site"},
-            site_name: {value:"Home"} 
+            siteName: {value:"Home"} 
         },
         credentials: {
             username: {value:"sure",required:true},
             password: {value:"1234",required:true},
         },
         label: function() {
-            return 'Verisureconfig';
+            return siteName || 'VerisureConfig';
         }
     });
 </script>
@@ -23,5 +23,9 @@
     <div class="form-row">
         <label for="node-config-input-password"><i class="icon-bookmark"></i> Password</label>
         <input type="text" id="node-config-input-password">
+    </div>
+    <div class="form-row">
+        <label for="node-input-siteName"><i class="icon-bookmark"></i> Sitename </label>
+        <input type="text" id="node-config-siteName">
     </div>
 </script>
