@@ -33,7 +33,6 @@ module.exports = function (RED) {
         .then(installations => installations[0].getOverview())
         .then((overview) => {
           // switch on the node-red payload to figure what to do
-          this.debug('type of :' + typeof overview);
           switch (msg.payload.type) {
             case 'site':
               currentReadings = overview;
@@ -60,10 +59,11 @@ module.exports = function (RED) {
         })
 
         .catch((error) => {
-          currentReadings = { 'Error': error };
+          currentReadings = { 'Error': true, 'message': error };
           this.error(currentReadings);
           this.debug('Error when fetching Verisure sensor metrics, verisure On msg async use of Verisure package: ' + currentReadings);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
+          msg.payload = currentReadings;
           this.send(msg);
         });
     });
@@ -73,6 +73,7 @@ module.exports = function (RED) {
 
     });
   }
+  // todo, work out better abstractions for Get functions. Overcome datamodel issues
 
   // Function for parsing arguments and fetching ordered climate sensor data
   function climateGet (msg, overview) {
@@ -103,6 +104,10 @@ module.exports = function (RED) {
       let area = msg.payload.area;
       return findByArea(overview.doorLockStatusList, area) || { 'Error': true, 'message': 'No such lock device with name: ' + area };
     }
+    else if (typeof msg.payload.label === 'string' && msg.payload.label !== '') {
+      let label = msg.payload.label;
+      return findByLabel(overview.doorLockStatusList, label) || { 'Error': true, 'message': 'No such device with label: ' + label };
+    }
     else {
       return { 'Error': true, 'message': 'No valid id provided (label, index, area)' };
     }
@@ -118,6 +123,10 @@ module.exports = function (RED) {
       let area = msg.payload.area;
       return findByArea(overview.doorWindow.doorWindowDevice, area) || { 'Error': true, 'message': 'No such doorWindows device with name: ' + area };
     }
+    else if (typeof msg.payload.label === 'string' && msg.payload.label !== '') {
+      let label = msg.payload.label;
+      return findByLabel(overview.doorWindow.doorWindowDevice, label) || { 'Error': true, 'message': 'No such device with label: ' + label };
+    }
     else {
       return { 'Error': true, 'message': 'No valid id provided (label, index, area)' };
     }
@@ -127,19 +136,16 @@ module.exports = function (RED) {
   function findByArea (collection, string) {
     let area = '';
     for (var item in collection) {
-      area = collection[item].deviceArea || collection[item].area;
+      area = collection[item].deviceArea || collection[item].area; // inconsistency in data model naming, mitigation failover
       if (area === string) { return collection[item]; }
     }
   }
   // loop through and return based on area, mitigate for inconsistence in verisure datamodel
   function findByLabel (collection, string) {
-    let label = '';
     for (var item in collection) {
       if (collection[item].deviceLabel === string) { return collection[item]; }
     }
   }
-
-
 
   RED.nodes.registerType('VerisureSensorNode', VerisureSensorNode);
 };
