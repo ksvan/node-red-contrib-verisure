@@ -37,12 +37,10 @@ module.exports = function (RED) {
         .then((overview) => {
           currentStatus = overview.armState.statusType;
           // Fix code, adapt to nodered
+          currentStatus = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.date, 'name': overview.name };
           if (currentStatus !== lastStatus) {
-            // Update Webtask Storage with new status
-            currentStatus = { 'currentStatus': currentStatus, 'changed': true, 'date': overview.date, 'name': overview.name };
-          } else {
-            // Nothing has changed, just return the state as JSON
-            currentStatus = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.date, 'name': overview.name };
+            // Update as changed state before sending
+            currentStatus.changed = true;
           }
           lastStatus = overview.armState.statusType;
           // return current status, reuse existing object, replace only payload
