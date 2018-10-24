@@ -21,6 +21,7 @@ module.exports = function (RED) {
 
     var lastStatus = 'DISARMED';
     var currentStatus = 'test';
+    var result = {};
 
     // what to do with payload incoming ///
     this.on('input', function (msg) {
@@ -37,16 +38,16 @@ module.exports = function (RED) {
         .then((overview) => {
           currentStatus = overview.armState.statusType;
           // Fix code, adapt to nodered
-          currentStatus = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.date, 'name': overview.name };
+          result = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.armState.date, 'name': overview.armState.name };
           if (currentStatus !== lastStatus) {
             // Update as changed state before sending
-            currentStatus.changed = true;
+            result.changed = true;
           }
           lastStatus = overview.armState.statusType;
           // return current status, reuse existing object, replace only payload
-          msg.payload = currentStatus;
+          msg.payload = result;
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
-          this.debug('Status fetched : ' + currentStatus);
+          this.debug('Status fetched : ' + result.name);
           this.send(msg);
         })
 
