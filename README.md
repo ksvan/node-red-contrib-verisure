@@ -57,7 +57,8 @@ You will find all indexes and labels if you output a fill site object and look t
 
 
 #### Return objects
-Climate: {"deviceLabel":"2ZEL TMP","deviceArea":"Gang","deviceType":"SMOKE2","temperature":21.9,"humidity":40,"time":"2018-10-19T17:51:54.000Z"}
+Climate: {"deviceLabel":"2ZEL TMP","area":"Gang","deviceType":"SMOKE2","temperature":21.9,"humidity":40,"time":"2018-10-19T17:51:54.000Z"}
+Climate may contain the deviceArea element as well, this is due to inconsistency in Verisure datamodel. This node normalizes this by adding the area element. Values will be the same. 
 
 Doorlock: {"deviceLabel":"2ZF7 SFG","area":"Hoveddør","userString":"Tor","method":"CODE","lockedState":"UNLOCKED","currentLockState":"UNLOCKED","pendingLockState":"NONE","eventTime":"2018-10-19T17:33:23.000Z","secureModeActive":false,"motorJam":false,"paired":true}
 

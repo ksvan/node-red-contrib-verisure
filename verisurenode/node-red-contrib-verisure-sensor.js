@@ -6,6 +6,7 @@ module.exports = function (RED) {
 
     // initial config of the node  ///
     var node = this;
+    const Verisure = require('verisure');
     // Retrieve the config node
     try {
       this.verUser = RED.nodes.getNode(config.user);
@@ -22,7 +23,6 @@ module.exports = function (RED) {
     // what to do with payload incoming ///
     this.on('input', function (msg) {
       this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
-      var Verisure = require('verisure');
       var verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       var currentReadings;
       // todo add input validation
@@ -54,7 +54,7 @@ module.exports = function (RED) {
           // Close up and return
           this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
           this.debug('Status fetched : ' + currentReadings);
-          msg.payload = currentReadings;
+          msg.payload = cleanUpData(currentReadings);
           this.send(msg);
         })
 
@@ -75,6 +75,13 @@ module.exports = function (RED) {
   }
   // todo, work out better abstractions for Get functions. Overcome datamodel issues
 
+  // function to clean up where i find inconsistency in Verisure Datamodell, not to expose this in node-red and making logic there more complicated
+  function cleanUpData (readings) {
+    if (typeof readings.deviceArea === 'string' && readings.deviceArea !== '') {
+      readings.area = readings.deviceArea; // deviceArea used only for climate control scope, else just area
+    }
+    return readings;
+  }
   // Function for parsing arguments and fetching ordered climate sensor data
   function climateGet (msg, overview) {
     if (typeof msg.payload.index === 'number' && msg.payload.index >= 0) {
@@ -135,14 +142,14 @@ module.exports = function (RED) {
   // loop through and return based on area, mitigate for inconsistence in verisure datamodel
   function findByArea (collection, string) {
     let area = '';
-    for (var item in collection) {
+    for (let item in collection) {
       area = collection[item].deviceArea || collection[item].area; // inconsistency in data model naming, mitigation failover
       if (area === string) { return collection[item]; }
     }
   }
   // loop through and return based on area, mitigate for inconsistence in verisure datamodel
   function findByLabel (collection, string) {
-    for (var item in collection) {
+    for (let item in collection) {
       if (collection[item].deviceLabel === string) { return collection[item]; }
     }
   }

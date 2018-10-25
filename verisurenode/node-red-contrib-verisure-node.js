@@ -6,6 +6,8 @@ module.exports = function (RED) {
 
     // initial config of the node  ///
     var node = this;
+    const Verisure = require('verisure');
+
     // Retrieve the config node
     try {
       this.verUser = RED.nodes.getNode(config.user);
@@ -19,16 +21,14 @@ module.exports = function (RED) {
       return;
     }
 
-    var lastStatus = 'DISARMED';
-    var currentStatus = 'test';
-    var result = {};
-
     // what to do with payload incoming ///
     this.on('input', function (msg) {
+      let lastStatus = 'DISARMED';
+      let currentStatus = 'test';
+      let result = {};
       this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
       // Verisure setup (moved to on-input creation of the object, reuse across events trigger an auth error from Verisure)
-      var Verisure = require('verisure');
-      var verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
+      let verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       // todo add input validation
 
       // take action, check status

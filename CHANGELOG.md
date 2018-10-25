@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for vacation mode
 - Support for lock status
+- Support for multiple sites, choose as part of config node setup
 
 ## 0.4.0 (Unreleased so far)
 ### Added
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Former Verisurenode is now VerisureAlarm node, only fetching alarm status [BREAKING change]
 - Return object on alarm status contains more data, date for changed status and which user authorized it
 - Changed node category to Verisure, as number of nodes grows
+- Sensor node can rode return the file site datastructure if preferred. Note that this node then does not normalize data
 
 ## 0.3.3
 ### Fixed
