@@ -11,20 +11,20 @@ module.exports = function (RED) {
     try {
       this.verUser = RED.nodes.getNode(config.user);
     } catch (err) {
-      this.error('Error, no login node exists - verisure.js l-13: ' + err);
+      this.error('Error, no login/config node exists - verisure sensor.js l-132 ' + err);
       this.debug('Couldnt get config node : ' + this.verUser);
     }
 
     if (typeof node.verUser === 'undefined' || !node.verUser || !node.verUser.credentials.username || !node.verUser.credentials.password) {
-      this.warn('No credentials given! Missing config node details. Verisure.js l-17 :' + node.verUser);
+      this.warn('No credentials given! Missing config node details. Verisure sensor.js l-18 :' + node.verUser);
       return;
     }
 
     // what to do with payload incoming ///
     this.on('input', function (msg) {
       this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
-      var verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
-      var currentReadings;
+      let verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
+      let currentReadings;
       // todo add input validation
 
       // take action, check status
@@ -82,6 +82,7 @@ module.exports = function (RED) {
     }
     return readings;
   }
+
   // Function for parsing arguments and fetching ordered climate sensor data
   function climateGet (msg, overview) {
     if (typeof msg.payload.index === 'number' && msg.payload.index >= 0) {
@@ -160,5 +161,4 @@ module.exports = function (RED) {
 /*
 Consider todo:
   - move Verisure connection to config node, share connection between nodes
-  - add support for mapping out more devices from overview
 */

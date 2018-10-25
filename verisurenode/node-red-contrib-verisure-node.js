@@ -17,7 +17,7 @@ module.exports = function (RED) {
     }
 
     if (typeof node.verUser === 'undefined' || !node.verUser || !node.verUser.credentials.username || !node.verUser.credentials.password) {
-      this.warn('No credentials given! Missing config node details. Verisure.js l-17 :' + node.verUser);
+      this.warn('No credentials given! Missing config node details. Verisure.js l-19 :' + node.verUser);
       return;
     }
 
@@ -72,5 +72,4 @@ module.exports = function (RED) {
 /*
 Consider todo:
   - move Verisure connection to config node, share connection between nodes
-  - add support for mapping out more devices from overview
 */

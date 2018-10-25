@@ -13,7 +13,7 @@ To install the stable version use the `Menu - Manage palette` option and search 
 
 	$ npm i node-red-contrib-verisure
 	
-Or, to install, download the files to a local folder, same structure. Switch to your .node-red directory and use npm link or npm install.
+Or, to install, download the files to a local folder, same structure. In this packages directory, run npm install or link. Switch to your .node-red directory and use npm link node-red-contrib-verisure (or npm install). Link is good if you want change the code and test.
 [NPMJS link](https://www.npmjs.com/package/node-red-contrib-verisure)
 
 ## Dependencies
@@ -51,7 +51,7 @@ The node accepts input in json format. Only one identificator needs to be given/
 	{'type': "lock", 'label': "2YGL M8"} // returns lock data from this device
 	{'type': "lock", 'index': 5} // returns lock data from this device
 	{'type': "doorwindow", 'index': 5} // returns door or window state data from this device
-	{'type': "site"} // returns full site overview as object. Hook up a debug to see all you can use
+	{'type': "site"} // returns full site overview as object. Hook up a debug to see all elements in object
 
 You will find all indexes and labels if you output a fill site object and look through it. Note that access by index will be faster. The node always reaches out to get new data from Verisure.
 
@@ -73,6 +73,8 @@ You should also consider setting up a specific user account on your verisure sit
 # Troubleshooting
 Not many common issues known at this point. 
 - If you pull to often from Verisure, they will throttle your requests.
+- Remember it's the total requests/consume they count, each node will make a call. Watch how your total use of Verisure nodes are spread out in time
+- If you need a lot of information often, consider using the full site object. Store it in flow or global context to further reduce calls
 - It seems like use of the same account for this node and the verisure App might log you out of the app.
 - Breaking change in version 0.4, node-red will complain about missing VerisureNode. You need to replace this in your flows with the new VerisureAlarmnode
 - And by the way, do not expect that your installation company managed to keep naming standards consistent. Area for your main door lock and your main door open/closed sensor might be different...

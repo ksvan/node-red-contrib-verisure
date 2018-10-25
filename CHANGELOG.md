@@ -6,21 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] Future
 ### Changed
-- actual 1.0 release after more test and tweaking
-- support for picking which alarm site for a given user to connect to
-- support for fetching data from multiple sensors, return array
-- separate lock node for specific flows and simplicity
-- separate node for site info, full object. Cached and real time mode, specify or force refresh
-- work more on code structure and abstractions
+- Actual 1.0 release after more test and tweaking
+- Support for picking which alarm site for a given user to connect to
+- Support for fetching data from multiple sensors, return array
+- Separate lock node for specific flows and simplicity
+- Separate node for site info, full object. Cached and real time mode, specify or force refresh
+- Work more on code structure and abstractions
+- Simple caching for calls, reduce calls to verisure
+
 
 ### Added
 - Support for vacation mode
 - Support for lock status
 - Support for multiple sites, choose as part of config node setup
 
+### Not be addedd
+- Most probably not setting values or changing Verisure site in any manner, due to security. Keep your Verisure site for security reasons, not smarthome features. Separations of concern.
+
 ## 0.4.0 (Unreleased so far)
 ### Added
-- Node for extracting sensor data
+- Node for supporting Verisure devices as well, extracting data, climate values etc
 
 ### Changed
 - Former Verisurenode is now VerisureAlarm node, only fetching alarm status [BREAKING change]
