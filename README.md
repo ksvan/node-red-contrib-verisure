@@ -55,14 +55,23 @@ You will find all indexes and labels if you output a fill site object and look t
 
 
 #### Return objects
-Climate: {"deviceLabel":"2ZEL TMP","area":"Gang","deviceType":"SMOKE2","temperature":21.9,"humidity":40,"time":"2018-10-19T17:51:54.000Z"}
+Climate: 
+	
+	{"deviceLabel":"2ZEL TMP","area":"Gang","deviceType":"SMOKE2","temperature":21.9,"humidity":40,"time":"2018-10-19T17:51:54.000Z"}
+
 Climate may contain the deviceArea element as well, this is due to inconsistency in Verisure datamodel. This node normalizes this by adding the area element. Values will be the same. 
 
-Doorlock: {"deviceLabel":"2ZF7 SFG","area":"Hoveddør","userString":"Tor","method":"CODE","lockedState":"UNLOCKED","currentLockState":"UNLOCKED","pendingLockState":"NONE","eventTime":"2018-10-19T17:33:23.000Z","secureModeActive":false,"motorJam":false,"paired":true}
+Doorlock: 
 
-DoorWindow: {"deviceLabel":"2JRY 4WTH","area":"Inngang","state":"CLOSE","wired":false,"reportTime":"2018-10-19T17:34:00.000Z"}
+	{"deviceLabel":"2ZF7 SFG","area":"Hoveddør","userString":"Tor","method":"CODE","lockedState":"UNLOCKED","currentLockState":"UNLOCKED","pendingLockState":"NONE","eventTime":"2018-10-19T17:33:23.000Z","secureModeActive":false,"motorJam":false,"paired":true}
 
-Error: { 'Error': true, 'message': 'No such device' }
+DoorWindow: 
+
+	{"deviceLabel":"2JRY 4WTH","area":"Inngang","state":"CLOSE","wired":false,"reportTime":"2018-10-19T17:34:00.000Z"}
+
+Error: 
+	
+	{ 'Error': true, 'message': 'No such device' }
 
 # Security
 Verisure system is quite secure as such, but care should be taken on your side as well when integrating. Node-red should be set up with your custom encryption key, that will be used for securing credentials. This is done by setting the credentialSecret key in the node-red settings files. 

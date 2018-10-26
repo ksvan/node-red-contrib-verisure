@@ -27,7 +27,13 @@
 </script>
 
 <script type="text/x-red" data-help-name="VerisureSensorNode">
-    <p>A node for interacting with Verisure systems, fetching sensor metrics. On message input, returns data for the given named sensor. </p><p>Return payload format { "deviceLabel": "ABCD 1234",
+    <p>A node for interacting with Verisure systems, fetching sensor metrics. On message input, returns data for the given named sensor. </p>
+    <p> <b>Input payload to fetch sensor data. </b>Only type and one of the criterias is needed (label,index or area)<br>
+        {"type":"climate","area":"Kjøkken","label":"DRF TGH", "index":0}
+    </p>
+
+    <p><b>Return payload format</b> <br>
+      { "deviceLabel": "ABCD 1234",
       "area": "Hall",
       "deviceType": "SMOKE2",
       "temperature": 22.0,
