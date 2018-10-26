@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Return object on alarm status contains more data, date for changed status and which user authorized it
 - Changed node category to Verisure, as number of nodes grows
 - Sensor node can rode return the file site datastructure if preferred. Note that this node then does not normalize data
+- Added a lot in Readme
 
 ## 0.3.3
 ### Fixed
