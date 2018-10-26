@@ -3,8 +3,6 @@
 This module provides two nodes, one config and one function node, to fetch the status of a Verisure site.
 The module and it's dependencies is strictly unofficial, not supported in any way by Verisure AS (and use is probably not encouraged by them)
 
-# Unreleased branch for adding device data support
-
 ## Install
 NB! Breaking changes in version 0.4, separation of alarm node and newly added sensor node.
 

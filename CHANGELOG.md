@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Not be addedd
 - Most probably not setting values or changing Verisure site in any manner, due to security. Keep your Verisure site for security reasons, not smarthome features. Separations of concern.
 
-## 0.4.0 (Unreleased so far)
+## 0.4.0 (26.10.2018)
 ### Added
 - Node for supporting Verisure devices as well, extracting data, climate values etc
 
