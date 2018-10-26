@@ -1,12 +1,12 @@
 # Node-red-contrib-Verisure
 
-This module provides two nodes, one config and one function node, to fetch the status of a Verisure site.
+This module provides three nodes, one config and two function nodes, to fetch the status of a Verisure alarm and sensors.
 The module and it's dependencies is strictly unofficial, not supported in any way by Verisure AS (and use is probably not encouraged by them)
 
 ## Install
 NB! Breaking changes in version 0.4, separation of alarm node and newly added sensor node.
 
-To install 
+To install (node-red)
 To install the stable version use the `Menu - Manage palette` option and search for `node-red-contrib-verisure`, or run the following command in your Node-RED user directory (typically `~/.node-red`):
 
 	$ npm i node-red-contrib-verisure
