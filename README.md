@@ -80,6 +80,7 @@ You should also consider setting up a specific user account on your verisure sit
 # Troubleshooting
 Not many common issues known at this point. 
 - If you pull to often from Verisure, they will throttle your requests.
+- They answer quite slowly some times, might be throttling on their side as well
 - Remember it's the total requests/consume they count, each node will make a call. Watch how your total use of Verisure nodes are spread out in time
 - If you need a lot of information often, consider using the full site object. Store it in flow or global context to further reduce calls
 - It seems like use of the same account for this node and the verisure App might log you out of the app.
