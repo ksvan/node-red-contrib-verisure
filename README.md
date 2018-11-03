@@ -1,5 +1,7 @@
 # Node-red-contrib-Verisure
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ksvan/node-red-contrib-verisure.svg)](https://greenkeeper.io/)
+
 This module provides three nodes, one config and two function nodes, to fetch the status of a Verisure alarm and sensors.
 The module and it's dependencies is strictly unofficial, not supported in any way by Verisure AS (and use is probably not encouraged by them)
 
