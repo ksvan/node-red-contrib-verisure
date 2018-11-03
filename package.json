@@ -5,6 +5,7 @@
   "author": "Kristian Svantorp",
   "license": "MIT",
   "dependencies": {
+    "eslint-plugin-json": "^1.2.1",
     "node-red": "^0.18.4",
     "package.json": "^2.0.1",
     "verisure": "^2.3"
@@ -35,6 +36,7 @@
     "eslint-plugin-standard": "^4.0.0"
   },
   "scripts": {
-  "test": "eslint *.js && eslint verisurenode/*.js && testrun.js"
-}
+    "pretest": "eslint *.js && eslint verisurenode/*.js",
+    "test": "node testrun.js"
+  }
 }
