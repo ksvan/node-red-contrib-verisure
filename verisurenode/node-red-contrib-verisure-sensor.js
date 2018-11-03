@@ -10,7 +10,8 @@ module.exports = function (RED) {
     // Retrieve the config node
     try {
       this.verUser = RED.nodes.getNode(config.user);
-    } catch (err) {
+    }
+    catch (err) {
       this.error('Error, no login/config node exists - verisure sensor.js l-132 ' + err);
       this.debug('Couldnt get config node : ' + this.verUser);
     }
