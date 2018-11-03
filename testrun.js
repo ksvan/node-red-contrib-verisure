@@ -2,4 +2,4 @@
 // validate files
 // test output from some functions
 
-console.log("test OK");
+console.log('test OK');
