@@ -5,9 +5,6 @@
   "author": "Kristian Svantorp",
   "license": "MIT",
   "dependencies": {
-    "eslint-plugin-json": "^1.2.1",
-    "node-red": "^0.18.4",
-    "package.json": "^2.0.1",
     "verisure": "^2.3"
   },
   "keywords": [
@@ -27,16 +24,23 @@
     "url": "https://github.com/ksvan/node-red-contrib-verisure.git"
   },
   "devDependencies": {
-    "eslint": "^5.5.0",
+    "eslint": "^5.8.0",
     "eslint-config-google": "^0.10.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
+    "node-red": "^0.18.7",
+    "node-red-node-test-helper": "^0.1.8",
+    "eslint-plugin-json": "^1.2.1",
+    "package.json": "^2.0.1",
+    "should": "^13.2.3"
   },
   "scripts": {
     "pretest": "eslint *.js && eslint verisurenode/*.js",
-    "test": "node testrun.js"
+    "test": "mocha tests/*_spec.js"
   }
 }
