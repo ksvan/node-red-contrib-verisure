@@ -20,18 +20,15 @@ describe('Alarm Status node', function () {
     // intercept search for users sites, return a list
     nock(netScope)
       .get('/xbn/2/installation/search?email=' + verEmail)
-      .replyWithFile(200, `${__dirname}/sites_reply.json`)
-      .log(console.log);
+      .replyWithFile(200, `${__dirname}/sites_reply.json`);
     // intercept auth token, reply with fake token
     nock(netScope)
       .get('/xbn/2/cookie')
-      .replyWithFile(200, `${__dirname}/token_reply.xml`)
-      .log(console.log);
+      .replyWithFile(200, `${__dirname}/token_reply.xml`);
     // intercept listing of specified site, full site object all sensors etc
     nock(netScope)
       .get('/xbn/2/installation/123456789/overview')
-      .replyWithFile(200, `${__dirname}/test_site.json`)
-      .log(console.log);
+      .replyWithFile(200, `${__dirname}/test_site.json`);
   });
 
   after(function (done) {
