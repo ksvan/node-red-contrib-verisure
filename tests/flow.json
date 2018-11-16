@@ -1,0 +1,5 @@
+[{"id":"ca611c65.4ba1b","type":"VerisureAlarmNode","z":"4b6d2a72.316be4","name":"Verisure Alarm","user":"886ad7eb.da82e8","x":240,"y":240,"wires":[["5110e948.a80288"]]},
+
+{"id":"5110e948.a80288","type":"debug","z":"4b6d2a72.316be4","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":430,"y":240,"wires":[]},{"id":"441fb87a.415aa8","type":"inject","z":"4b6d2a72.316be4","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":120,"y":180,"wires":[["ca611c65.4ba1b"]]},
+
+{"id":"886ad7eb.da82e8","type":"VerisureConfig","z":"","displayName":"Verisure Site","siteName":"Home"}]

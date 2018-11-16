@@ -1,0 +1,16 @@
+[
+  {
+    "giid": "123456789",
+    "firmwareVersion": 0,
+    "routingGroup": "SE",
+    "shard": 10,
+    "locale": "no_NO",
+    "signalFilterId": 1,
+    "deleted": false,
+    "cid": "00123456",
+    "street": "Osloveien 23",
+    "streetNo1": "",
+    "streetNo2": "",
+    "alias": "Osloveien"
+  }
+]

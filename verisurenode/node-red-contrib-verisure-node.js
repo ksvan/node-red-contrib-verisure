@@ -7,7 +7,6 @@ module.exports = function (RED) {
     // initial config of the node  ///
     var node = this;
     const Verisure = require('verisure');
-
     // Retrieve the config node
     try {
       this.verUser = RED.nodes.getNode(config.user);
@@ -16,12 +15,10 @@ module.exports = function (RED) {
       this.error('Error, no login node exists - verisure.js l-13: ' + err);
       this.debug('Couldnt get config node : ' + this.verUser);
     }
-
     if (typeof node.verUser === 'undefined' || !node.verUser || !node.verUser.credentials.username || !node.verUser.credentials.password) {
       this.warn('No credentials given! Missing config node details. Verisure.js l-19 :' + node.verUser);
       return;
     }
-
     // what to do with payload incoming ///
     this.on('input', function (msg) {
       let lastStatus = 'DISARMED';
@@ -31,7 +28,6 @@ module.exports = function (RED) {
       // Verisure setup (moved to on-input creation of the object, reuse across events trigger an auth error from Verisure)
       let verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       // todo add input validation
-
       // take action, check status
       verisure.getToken()
         .then(() => verisure.getInstallations())
@@ -51,12 +47,12 @@ module.exports = function (RED) {
           this.debug('Status fetched : ' + result.name);
           this.send(msg);
         })
-
         .catch((error) => {
-          currentStatus = { 'Error': error };
-          this.error(currentStatus);
+          console.dir(error);
+          this.error({ 'Error': error });
           this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
+          console.log('msg: ' + msg.payload);
           this.send(msg);
         });
     });

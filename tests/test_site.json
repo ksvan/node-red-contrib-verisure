@@ -1,0 +1,145 @@
+{
+  "armState": {
+    "statusType": "DISARMED",
+    "date": "2018-11-08T06:54:28.000Z",
+    "name": "Kristian",
+    "changedVia": "CODE"
+  },
+  "armstateCompatible": true,
+  "controlPlugs": [
+    {
+      "deviceId": "35700412",
+      "deviceLabel": "2AFE 2M7G",
+      "area": "smartkontakt",
+      "profile": "OTHER",
+      "currentState": "ON",
+      "pendingState": "NONE"
+    }
+  ],
+  "smartPlugs": [
+    {
+      "icon": "OTHER",
+      "isHazardous": false,
+      "deviceLabel": "2ATE 2M7G",
+      "area": "smartkontakt",
+      "currentState": "ON",
+      "pendingState": "NONE"
+    }
+  ],
+  "doorLockStatusList": [
+    {
+      "deviceLabel": "2AF7 P2T2",
+      "area": "Hdør",
+      "method": "THUMB",
+      "lockedState": "UNLOCKED",
+      "currentLockState": "UNLOCKED",
+      "pendingLockState": "NONE",
+      "eventTime": "2018-11-08T08:01:29.000Z",
+      "secureModeActive": false,
+      "motorJam": false,
+      "paired": true
+    }
+  ],
+  "totalSmsCount": 199,
+  "climateValues": [
+    {
+      "deviceLabel": "4AEL M8XB",
+      "deviceArea": "kontor",
+      "deviceType": "SMOKE2",
+      "temperature": 20.6,
+      "humidity": 44,
+      "time": "2018-11-08T11:53:36.000Z"
+    },
+    {
+      "deviceLabel": "2FEL M97G",
+      "deviceArea": "kjeller",
+      "deviceType": "SMOKE2",
+      "temperature": 21,
+      "humidity": 41,
+      "time": "2018-11-08T11:53:21.000Z"
+    },
+    {
+      "deviceLabel": "25EL M9PE",
+      "deviceArea": "Soverom",
+      "deviceType": "SMOKE2",
+      "temperature": 20.6,
+      "humidity": 44,
+      "time": "2018-11-08T11:52:48.000Z"
+    },
+    {
+      "deviceLabel": "2AEL MTXF",
+      "deviceArea": "Stue",
+      "deviceType": "SMOKE2",
+      "temperature": 21.9,
+      "humidity": 37,
+      "time": "2018-11-08T11:54:05.000Z"
+    },
+    {
+      "deviceLabel": "2AEL MREM",
+      "deviceArea": "Gang",
+      "deviceType": "SMOKE2",
+      "temperature": 21.5,
+      "humidity": 45,
+      "time": "2018-11-08T11:53:04.000Z"
+    }
+  ],
+  "installationErrorList": [
+    {
+      "cid": "00909806",
+      "zone": "016",
+      "statusType": "SUPV",
+      "state": true,
+      "date": "2017-12-22T12:19:56.000Z",
+      "name": "US016",
+      "deviceLabel": "2AJE 2H7G",
+      "deviceType": "CONTROLPLUG1",
+      "notificationDeviceType": "CONTROLPLUG",
+      "area": "smartkontakt"
+    }
+  ],
+  "pendingChanges": 0,
+  "ethernetModeActive": true,
+  "ethernetConnectedNow": true,
+  "heatPumps": [],
+  "smartCameras": [],
+  "latestEthernetStatus": {
+    "latestEthernetTestResult": true,
+    "testDate": "2018-11-08T03:43:17.000Z",
+    "protectedArea": "Stue",
+    "deviceLabel": "2688 SR3Y"
+  },
+  "customerImageCameras": [],
+  "batteryProcess": {
+    "active": false
+  },
+  "userTracking": {
+    "installationStatus": "NOT_CONFIGURED"
+  },
+  "eventCounts": [],
+  "doorWindow": {
+    "reportState": true,
+    "doorWindowDevice": [
+      {
+        "deviceLabel": "2JEQ 4RSH",
+        "area": "Inngang",
+        "state": "CLOSE",
+        "wired": false,
+        "reportTime": "2018-11-08T12:21:13.000Z"
+      },
+      {
+        "deviceLabel": "2JYJ KYHE",
+        "area": "Dør",
+        "state": "CLOSE",
+        "wired": false,
+        "reportTime": "2018-11-08T10:25:42.000Z"
+      },
+      {
+        "deviceLabel": "2JEK JVYD",
+        "area": "Vindu",
+        "state": "OPEN",
+        "wired": false,
+        "reportTime": "2017-04-01T05:44:05.000Z"
+      }
+    ]
+  }
+}
