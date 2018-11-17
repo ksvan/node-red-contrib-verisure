@@ -48,11 +48,10 @@ module.exports = function (RED) {
           this.send(msg);
         })
         .catch((error) => {
-          console.dir(error);
           this.error({ 'Error': error });
           this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
-          console.log('msg: ' + msg.payload);
+          msg.payload = { 'Error': true, 'message': error };
           this.send(msg);
         });
     });

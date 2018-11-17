@@ -35,6 +35,7 @@ describe('Alarm Status node', function () {
 
   after(function (done) {
     helper.stopServer(done);
+    nock.cleanAll();
   });
 
   afterEach(function () {
@@ -83,4 +84,29 @@ describe('Alarm Status node', function () {
       n1.receive({ payload: 'test' });
     });
   }); // IT end
+
+  it('should fail and report error', function (done) {
+    helper.load([sureNode, confNode], flow, credentials, function () {
+      let n1 = helper.getNode('n1');
+      let nh = helper.getNode('nh');
+      nock.cleanAll();
+      // all failed network requests setup
+      nock(netScope)
+        .get('/xbn/2/installation/123456789/overview')
+        .reply(400, ``);
+      // intercept auth token, reply with fake token
+      nock(netScope)
+        .get('/xbn/2/cookie')
+        .reply(200, ``);
+      nock(netScope)
+        .get('/xbn/2/installation/search?email=' + verEmail)
+        .reply(200, ``);
+      nh.on('input', function (msg) {
+        msg.payload.should.have.property('Error', true);
+        done();
+      });
+      // get flow and test going
+      n1.receive({ payload: 'test' });
+    });
+  });
 });

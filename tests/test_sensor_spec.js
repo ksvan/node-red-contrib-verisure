@@ -34,6 +34,7 @@ describe('Verisure Sensor Node', function () {
   });
 
   after(function (done) {
+    nock.cleanAll();
     helper.stopServer(done);
   });
 
@@ -140,6 +141,31 @@ describe('Verisure Sensor Node', function () {
       });
       // get flow and test going
       n1.receive({ payload: { type: 'lock', index: 0 } });
+    });
+  }); // It fetches lock data end
+
+  // verify node can fetch full site object
+  it('should fetch lock data', function (done) {
+    helper.load([sensNode, confNode], flow, credentials, function () {
+      let nh = helper.getNode('nh');
+      let n1 = helper.getNode('n1');
+      nh.on('input', function (msg) {
+        msg.payload.should.have.properties({
+          deviceLabel: '2AF7 P2T2',
+          area: 'Hdør',
+          method: 'THUMB',
+          lockedState: 'UNLOCKED',
+          currentLockState: 'UNLOCKED',
+          pendingLockState: 'NONE',
+          eventTime: '2018-11-08T08:01:29.000Z',
+          secureModeActive: false,
+          motorJam: false,
+          paired: true
+        });
+        done();
+      });
+      // get flow and test going
+      n1.receive({ payload: { type: 'site' } });
     });
   }); // It fetches lock data end
 });
