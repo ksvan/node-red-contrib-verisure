@@ -1,19 +1,22 @@
-
+/* eslint-env mocha */
 var should = require('should');
 var helper = require('node-red-node-test-helper');
 var sureNode = require('../verisurenode/node-red-contrib-verisure-conf.js');
 const verEmail = 'test@fest.no';
 const verPassword = '12345';
-  
+ 
 helper.init(require.resolve('node-red'));
 
 describe('Verisure Config Node', function () {
-  beforeEach(function (done) {
+  before(function (done) {
     helper.startServer(done);
   });
 
-  afterEach(function (done) {
+  afterEach(function () {
     helper.unload();
+  });
+
+  after(function (done) {
     helper.stopServer(done);
   });
 
