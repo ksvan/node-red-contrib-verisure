@@ -8,7 +8,7 @@ var confNode = require('../verisurenode/node-red-contrib-verisure-conf.js');
 const netScope = /https:\/\/e-api0\d.verisure.com/; // 'https://e-api01.verisure.com/';
 const verEmail = 'test@fest.no';
 const verPassword = '12345';
-// nock.disableNetConnect();
+nock.disableNetConnect();
 
 describe('Alarm Status node', function () {
   before(function (done) {
@@ -47,23 +47,29 @@ describe('Alarm Status node', function () {
   ];
   var credentials = { nc: { 'username': verEmail, 'password': verPassword } };
 
+  it('should have credentials', function (done) {
+    helper.load([sureNode, confNode], flow, credentials, function () {
+      var n1 = helper.getNode('n1');
+      var nc = helper.getNode('nc');
+      n1.should.have.property('verUser');
+      nc.should.have.property('credentials');
+      nc.credentials.should.have.property('username', verEmail);
+      nc.credentials.should.have.property('password', verPassword);
+      done();
+    });
+  });
+
   it('should output alarmstatus', function (done) {
     helper.load([sureNode, confNode], flow, credentials, function () {
       var nh = helper.getNode('nh');
       var n1 = helper.getNode('n1');
       nh.on('input', function (msg) {
-        try {
-          msg.payload.should.have.properties({
-            'currentStatus': 'DISARMED',
-            'changed': false,
-            'date': '2018-11-08T06:54:28.000Z',
-            'name': 'Kristian' });
-          done();
-        }
-        catch (error) {
-          // console.log(error);
-          console.log('Not expected output object from alarmstatus');
-        }
+        msg.payload.should.have.properties({
+          'currentStatus': 'DISARMED',
+          'changed': false,
+          'date': '2018-11-08T06:54:28.000Z',
+          'name': 'Kristian' });
+        done();
       });
       n1.on('call:warn', call => {
         console.log('WARN' + call);

@@ -2,10 +2,12 @@
 var should = require('should');
 var helper = require('node-red-node-test-helper');
 var sureNode = require('../verisurenode/node-red-contrib-verisure-conf.js');
-
+const verEmail = 'test@fest.no';
+const verPassword = '12345';
+  
 helper.init(require.resolve('node-red'));
 
-describe('VerisureConfig', function () {
+describe('Verisure Config Node', function () {
   beforeEach(function (done) {
     helper.startServer(done);
   });
@@ -25,10 +27,12 @@ describe('VerisureConfig', function () {
   });
 
   it('should have credentials', function (done) {
-    var flow = [{ id: 'n1', type: 'VerisureConfig', displayName: 'Verisure Site', username: 'sure' }];
-    helper.load(sureNode, flow, function () {
+    var flow = [{ id: 'n1', type: 'VerisureConfig', displayName: 'Verisure Site' }];
+    var credentials = { n1: { 'username': verEmail, 'password': verPassword } };
+    helper.load(sureNode, flow, credentials, function () {
       var n1 = helper.getNode('n1');
-      n1.should.have.property('username', 'sure');
+      n1.credentials.should.have.property('username', verEmail);
+      n1.credentials.should.have.property('password', verPassword);
       done();
     });
   });
