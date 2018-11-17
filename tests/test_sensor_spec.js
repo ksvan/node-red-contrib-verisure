@@ -145,27 +145,24 @@ describe('Verisure Sensor Node', function () {
   }); // It fetches lock data end
 
   // verify node can fetch full site object
-  it('should fetch lock data', function (done) {
+  it('should fetch full site', function (done) {
     helper.load([sensNode, confNode], flow, credentials, function () {
       let nh = helper.getNode('nh');
       let n1 = helper.getNode('n1');
       nh.on('input', function (msg) {
-        msg.payload.should.have.properties({
-          deviceLabel: '2AF7 P2T2',
-          area: 'Hdør',
-          method: 'THUMB',
-          lockedState: 'UNLOCKED',
-          currentLockState: 'UNLOCKED',
-          pendingLockState: 'NONE',
-          eventTime: '2018-11-08T08:01:29.000Z',
-          secureModeActive: false,
-          motorJam: false,
-          paired: true
-        });
+        msg.payload.should.have.property('armState');
+        msg.payload.should.have.property('controlPlugs');
+        msg.payload.should.have.property('smartPlugs');
+        msg.payload.should.have.property('batteryProcess');
+        msg.payload.should.have.property('doorWindow');
+        msg.payload.should.have.property('smartCameras');
+        msg.payload.should.have.property('climateValues');
+        msg.payload.should.have.property('heatPumps');
+        msg.payload.should.have.property('pendingChanges');
         done();
       });
       // get flow and test going
       n1.receive({ payload: { type: 'site' } });
     });
-  }); // It fetches lock data end
+  }); // It fetches full site data end
 });
