@@ -1,10 +1,14 @@
 # Node-red-contrib-Verisure
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ksvan/node-red-contrib-verisure.svg)](https://greenkeeper.io/)
+[![Travis CI badge](https://travis-ci.com/ksvan/node-red-contrib-verisure.svg?branch=master)](https://www.travis-ci.com)
+
+
 This module provides three nodes, one config and two function nodes, to fetch the status of a Verisure alarm and sensors.
 The module and it's dependencies is strictly unofficial, not supported in any way by Verisure AS (and use is probably not encouraged by them)
 
 ## Install
-NB! Breaking changes in version 0.4, separation of alarm node and newly added sensor node.
+NB! Breaking changes in version 0.4, separation of alarm node and newly added sensor node. Only applicable if moving from < 0.4. No more breaks in 0.4.1
 
 To install (node-red)
 To install the stable version use the `Menu - Manage palette` option and search for `node-red-contrib-verisure`, or run the following command in your Node-RED user directory (typically `~/.node-red`):
@@ -87,6 +91,7 @@ Not many common issues known at this point.
 - Breaking change in version 0.4, node-red will complain about missing VerisureNode. You need to replace this in your flows with the new VerisureAlarmnode
 - And by the way, do not expect that your installation company managed to keep naming standards consistent. Area for your main door lock and your main door open/closed sensor might be different...
 - When working with the site object, note that naming standards in the objects properties are inconsistent, from the Verisure package, probably inherited from the Verisure apis/datamodel. For instance is area and devicearea properties used alternating.
+- Not all errors are handled in the Verisure nodejs module being used here, so this might lead to unhandled exceptions in communication or return object issues from Verisure
 
 # Legal Disclaimer
 
