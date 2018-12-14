@@ -10,7 +10,7 @@
             password: {value:"1234",required:true},
         },
         label: function() {
-            return siteName || 'VerisureConfig';
+            return this.displayName || 'VerisureConfig';
         }
     });
 </script>
@@ -25,7 +25,11 @@
         <input type="text" id="node-config-input-password">
     </div>
     <div class="form-row">
-        <label for="node-input-siteName"><i class="icon-bookmark"></i> Sitename </label>
-        <input type="text" id="node-config-siteName">
+        <label for="node-config-input-siteName"><i class="icon-bookmark"></i> Sitename </label>
+        <input type="text" id="node-config-input-siteName">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-displayName"><i class="icon-bookmark"></i> Displayname </label>
+        <input type="text" id="node-config-input-displayName">
     </div>
 </script>
