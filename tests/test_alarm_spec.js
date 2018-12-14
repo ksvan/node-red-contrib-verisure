@@ -85,6 +85,31 @@ describe('Alarm Status node', function () {
     });
   }); // IT end
 
+  it('should output correct changed status', function (done) {
+    helper.load([sureNode, confNode], flow, credentials, function () {
+      let nh = helper.getNode('nh');
+      let n1 = helper.getNode('n1');
+      nh.on('input', function (msg) {
+        msg.payload.should.have.property('changed', true);
+        done();
+      });
+      // get flow and test going
+      nock.cleanAll();
+      nock(netScope)
+        .get('/xbn/2/installation/search?email=' + verEmail)
+        .replyWithFile(200, `${__dirname}/sites_reply.json`);
+      // intercept auth token, reply with fake token
+      nock(netScope)
+        .get('/xbn/2/cookie')
+        .replyWithFile(200, `${__dirname}/token_reply.xml`);
+      // change to different alarm resposne, node should catch changed status and alter return value
+      nock(netScope)
+        .get('/xbn/2/installation/123456789/overview')
+        .replyWithFile(200, `${__dirname}/test_site2.json`);
+      n1.receive({ payload: 'test' });
+    });
+  }); // IT end
+
   it('should fail and report error', function (done) {
     helper.load([sureNode, confNode], flow, credentials, function () {
       let n1 = helper.getNode('n1');
