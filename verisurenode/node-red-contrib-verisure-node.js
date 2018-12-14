@@ -7,6 +7,7 @@ module.exports = function (RED) {
     // initial config of the node  ///
     var node = this;
     const Verisure = require('verisure');
+    let lastStatus = 'DISARMED';
     // Retrieve the config node
     try {
       this.verUser = RED.nodes.getNode(config.user);
@@ -21,7 +22,6 @@ module.exports = function (RED) {
     }
     // what to do with payload incoming ///
     this.on('input', function (msg) {
-      let lastStatus = 'DISARMED';
       let currentStatus = 'test';
       let result = {};
       this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
@@ -29,6 +29,7 @@ module.exports = function (RED) {
       let verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       // todo add input validation
       // take action, check status
+      this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
       verisure.getToken()
         .then(() => verisure.getInstallations())
         .then(installations => installations[0].getOverview())
@@ -36,6 +37,7 @@ module.exports = function (RED) {
           currentStatus = overview.armState.statusType;
           // Fix code, adapt to nodered
           result = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.armState.date, 'name': overview.armState.name };
+
           if (currentStatus !== lastStatus) {
             // Update as changed state before sending
             result.changed = true;
@@ -43,7 +45,7 @@ module.exports = function (RED) {
           lastStatus = overview.armState.statusType;
           // return current status, reuse existing object, replace only payload
           msg.payload = result;
-          this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
+          this.status({ fill: 'green', shape: 'ring', text: 'finished' });
           this.debug('Status fetched : ' + result.name);
           this.send(msg);
         })
@@ -58,7 +60,7 @@ module.exports = function (RED) {
 
     // tidy up
     this.on('close', function () {
-
+      // add verisure tidy up
     });
   }
 
