@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Separate lock node for specific flows and simplicity
 - Separate node for site info, full object. Cached and real time mode, specify or force refresh
 - Work more on code structure and abstractions
-- Simple caching for calls, reduce calls to verisure
+- Simple caching for calls/integrated throttling policy, to reduce calls to verisure, due to their throttling policies
 
 
 ### Added
@@ -31,10 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - dependencies updates
-- package.json script session
+- package.json script section
 
 ### Fixed
 - failure to return error in msg.payload when failing to get alarm status
+- failed return values in "changed" status when disarmed
 
 
 
