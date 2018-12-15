@@ -84,6 +84,7 @@ module.exports = function (RED) {
     return readings;
   }
 
+  // TODO: new split and abstractions below. generalize function to pick type of criteria
   // Function for parsing arguments and fetching ordered climate sensor data
   function climateGet (msg, overview) {
     if (typeof msg.payload.index === 'number' && msg.payload.index >= 0) {

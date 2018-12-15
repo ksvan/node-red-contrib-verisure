@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for lock status
 - Support for multiple sites, choose as part of config node setup
 
+### Fixed
+- Abstraction and methods on picking data from right object based and deciding what criteria to use. To much duplicate code
+
 ### Not be addedd
 - Most probably not setting values or changing Verisure site in any manner, due to security. Keep your Verisure site for security reasons, not smarthome features. Separations of concern.
 
