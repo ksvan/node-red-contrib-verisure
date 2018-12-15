@@ -7,7 +7,7 @@ module.exports = function (RED) {
     // initial config of the node  ///
     var node = this;
     const Verisure = require('verisure');
-    let lastStatus = 'DISARMED';
+    var lastStatus = 'DISARMED';
     // Retrieve the config node
     try {
       this.verUser = RED.nodes.getNode(config.user);

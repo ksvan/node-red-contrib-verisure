@@ -3,14 +3,14 @@
         category: 'Verisure',
         color: '#a6bbcf',
         defaults: {
-            name: {value:"Verisure Alarm"},
-            user: {value:"",type:"VerisureConfig", required:true}
+            name: { value: "Verisure Alarm" },
+            user: { value: "", type: "VerisureConfig", required:true }
         },
-        inputs:1,
-        outputs:1,
+        inputs: 1,
+        outputs: 1,
         icon: "file.png",
         label: function() {
-            return this.name||"VerisureAlarmNode";
+            return this.name || 'VerisureAlarmNode';
         }
     });
 </script>

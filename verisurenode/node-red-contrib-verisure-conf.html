@@ -2,12 +2,12 @@
     RED.nodes.registerType('VerisureConfig',{
         category: 'config',
         defaults: {
-            displayName: {value:"Verisure Site"},
-            siteName: {value:"Home"} 
+            displayName: { value: "Verisure Site" },
+            siteName: { value: "Home" } 
         },
         credentials: {
-            username: {value:"sure",required:true},
-            password: {value:"1234",required:true},
+            username: { value:"sure", required:true },
+            password: { value:"1234", required:true },
         },
         label: function() {
             return this.displayName || 'VerisureConfig';
