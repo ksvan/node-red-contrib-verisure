@@ -1,0 +1,5 @@
+*debug*
+*sample*
+node-modules/
+*sublime*
+.DS_Store
