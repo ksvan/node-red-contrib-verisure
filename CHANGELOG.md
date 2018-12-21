@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Most probably not setting values or changing Verisure site in any manner, due to security. Keep your Verisure site for security reasons, not smarthome features. Separations of concern.
 
 
-## 0.4.1 (XX)
+## 0.4.1 (21.12.2018)
 ### Added
 - Test automization. folder tests contains all scripts for testing.
 - CI Integration to test and support Greenkeeper
@@ -43,6 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## 0.4.0 (26.10.2018)
+NB! Breaking changes in version 0.4, separation of alarm node and newly added sensor node. Only applicable if moving from < 0.4. No more breaks in 0.4.1
+
 ### Added
 - Node for supporting Verisure devices as well, extracting data, climate values etc
 
