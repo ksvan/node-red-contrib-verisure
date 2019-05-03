@@ -26,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Not be addedd
 - Most probably not setting values or changing Verisure site in any manner, due to security. Keep your Verisure site for security reasons, not smarthome features. Separations of concern.
 
+## 0.4.2 (05.2019)
+
+### Changed
+- Dependencies for node-red, test-helper, eslint*
+- Testing on Node-red 0.2.0
+
+### Removed
+- support for older versions of nodejs. Updated to reflect node-red 0.2.0 requirements
 
 ## 0.4.1 (21.12.2018)
 ### Added
