@@ -24,7 +24,7 @@ module.exports = function (RED) {
     // what to do with payload incoming ///
     this.on('input', function (msg) {
       this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
-      let verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
+      const verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       let currentReadings;
       // todo add input validation
 
@@ -48,7 +48,7 @@ module.exports = function (RED) {
               currentReadings = doorWindowGet(msg, overview);
               break;
             default:
-              currentReadings = { 'Error': true, 'message': 'No such type: ' + msg.payload.type };
+              currentReadings = { Error: true, message: 'No such type: ' + msg.payload.type };
               break;
           }
 
@@ -60,7 +60,7 @@ module.exports = function (RED) {
         })
 
         .catch((error) => {
-          currentReadings = { 'Error': true, 'message': error };
+          currentReadings = { Error: true, message: error };
           this.error(currentReadings);
           this.debug('Error when fetching Verisure sensor metrics, verisure On msg async use of Verisure package: ' + currentReadings);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
@@ -88,71 +88,71 @@ module.exports = function (RED) {
   // Function for parsing arguments and fetching ordered climate sensor data
   function climateGet (msg, overview) {
     if (typeof msg.payload.index === 'number' && msg.payload.index >= 0) {
-      let index = msg.payload.index;
-      return overview.climateValues[index] || { 'Error': true, 'message': 'No such device with index: ' + index };
+      const index = msg.payload.index;
+      return overview.climateValues[index] || { Error: true, message: 'No such device with index: ' + index };
     }
     else if (typeof msg.payload.area === 'string' && msg.payload.area !== '') {
-      let area = msg.payload.area;
-      return findByArea(overview.climateValues, area) || { 'Error': true, 'message': 'No such device with name: ' + area };
+      const area = msg.payload.area;
+      return findByArea(overview.climateValues, area) || { Error: true, message: 'No such device with name: ' + area };
     }
     else if (typeof msg.payload.label === 'string' && msg.payload.label !== '') {
-      let label = msg.payload.label;
-      return findByLabel(overview.climateValues, label) || { 'Error': true, 'message': 'No such device with label: ' + label };
+      const label = msg.payload.label;
+      return findByLabel(overview.climateValues, label) || { Error: true, message: 'No such device with label: ' + label };
     }
     else {
-      return { 'Error': true, 'message': 'No valid id provided (label, index, area)' };
+      return { Error: true, message: 'No valid id provided (label, index, area)' };
     }
   }
 
   // Function for parsing arguments and fetching ordered lock data
   function lockGet (msg, overview) {
     if (typeof msg.payload.index === 'number' && msg.payload.index >= 0) {
-      let index = msg.payload.index;
-      return overview.doorLockStatusList[index] || { 'Error': true, 'message': 'No such lock device with index: ' + index };
+      const index = msg.payload.index;
+      return overview.doorLockStatusList[index] || { Error: true, message: 'No such lock device with index: ' + index };
     }
     else if (typeof msg.payload.area === 'string' && msg.payload.area !== '') {
-      let area = msg.payload.area;
-      return findByArea(overview.doorLockStatusList, area) || { 'Error': true, 'message': 'No such lock device with name: ' + area };
+      const area = msg.payload.area;
+      return findByArea(overview.doorLockStatusList, area) || { Error: true, message: 'No such lock device with name: ' + area };
     }
     else if (typeof msg.payload.label === 'string' && msg.payload.label !== '') {
-      let label = msg.payload.label;
-      return findByLabel(overview.doorLockStatusList, label) || { 'Error': true, 'message': 'No such device with label: ' + label };
+      const label = msg.payload.label;
+      return findByLabel(overview.doorLockStatusList, label) || { Error: true, message: 'No such device with label: ' + label };
     }
     else {
-      return { 'Error': true, 'message': 'No valid id provided (label, index, area)' };
+      return { Error: true, message: 'No valid id provided (label, index, area)' };
     }
   }
 
   // Function for parsing arguments and fetching ordered lock data
   function doorWindowGet (msg, overview) {
     if (typeof msg.payload.index === 'number' && msg.payload.index >= 0) {
-      let index = msg.payload.index;
-      return overview.doorWindow.doorWindowDevice[index] || { 'Error': true, 'message': 'No such doorWindows device with index: ' + index };
+      const index = msg.payload.index;
+      return overview.doorWindow.doorWindowDevice[index] || { Error: true, message: 'No such doorWindows device with index: ' + index };
     }
     else if (typeof msg.payload.area === 'string' && msg.payload.area !== '') {
-      let area = msg.payload.area;
-      return findByArea(overview.doorWindow.doorWindowDevice, area) || { 'Error': true, 'message': 'No such doorWindows device with name: ' + area };
+      const area = msg.payload.area;
+      return findByArea(overview.doorWindow.doorWindowDevice, area) || { Error: true, message: 'No such doorWindows device with name: ' + area };
     }
     else if (typeof msg.payload.label === 'string' && msg.payload.label !== '') {
-      let label = msg.payload.label;
-      return findByLabel(overview.doorWindow.doorWindowDevice, label) || { 'Error': true, 'message': 'No such device with label: ' + label };
+      const label = msg.payload.label;
+      return findByLabel(overview.doorWindow.doorWindowDevice, label) || { Error: true, message: 'No such device with label: ' + label };
     }
     else {
-      return { 'Error': true, 'message': 'No valid id provided (label, index, area)' };
+      return { Error: true, message: 'No valid id provided (label, index, area)' };
     }
   }
 
   // loop through and return based on area, mitigate for inconsistence in verisure datamodel
   function findByArea (collection, string) {
     let area = '';
-    for (let item in collection) {
+    for (const item in collection) {
       area = collection[item].deviceArea || collection[item].area; // inconsistency in data model naming, mitigation failover
       if (area === string) { return collection[item]; }
     }
   }
   // loop through and return based on area, mitigate for inconsistence in verisure datamodel
   function findByLabel (collection, string) {
-    for (let item in collection) {
+    for (const item in collection) {
       if (collection[item].deviceLabel === string) { return collection[item]; }
     }
   }

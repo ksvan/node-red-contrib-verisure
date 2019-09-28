@@ -26,7 +26,7 @@ module.exports = function (RED) {
       let result = {};
       this.status({ fill: 'orange', shape: 'ring', text: 'fetching' });
       // Verisure setup (moved to on-input creation of the object, reuse across events trigger an auth error from Verisure)
-      let verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
+      const verisure = new Verisure(this.verUser.credentials.username, this.verUser.credentials.password);
       // todo add input validation
       // take action, check status
       this.status({ fill: 'green', shape: 'ring', text: 'waiting' });
@@ -36,7 +36,7 @@ module.exports = function (RED) {
         .then((overview) => {
           currentStatus = overview.armState.statusType;
           // Fix code, adapt to nodered
-          result = { 'currentStatus': currentStatus, 'changed': false, 'date': overview.armState.date, 'name': overview.armState.name };
+          result = { currentStatus: currentStatus, changed: false, date: overview.armState.date, name: overview.armState.name };
 
           if (currentStatus !== lastStatus) {
             // Update as changed state before sending
@@ -50,10 +50,10 @@ module.exports = function (RED) {
           this.send(msg);
         })
         .catch((error) => {
-          this.error({ 'Error': error });
+          this.error({ Error: error });
           this.debug('Error when fetching Verisure status, verisure On msg async use of Verisure package: ' + currentStatus);
           this.status({ fill: 'red', shape: 'ring', text: 'error' });
-          msg.payload = { 'Error': true, 'message': error };
+          msg.payload = { Error: true, message: error };
           this.send(msg);
         });
     });
