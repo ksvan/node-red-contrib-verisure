@@ -11,7 +11,8 @@
   "keywords": [
     "verisure",
     "node",
-    "node-red"
+    "node-red",
+    "alarm"
   ],
   "node-red": {
     "nodes": {
