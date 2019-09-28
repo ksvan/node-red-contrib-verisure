@@ -5,8 +5,8 @@
   "author": "Kristian Svantorp",
   "license": "MIT",
   "dependencies": {
-    "node-red": "^0.20.8",
-    "verisure": "^2.4"
+    "node-red": ">=0.20.8",
+    "verisure": ">=2.4"
   },
   "keywords": [
     "verisure",
