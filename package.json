@@ -25,7 +25,8 @@
     "url": "https://github.com/ksvan/node-red-contrib-verisure.git"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
+
+    "eslint": "^6.0.0",
     "eslint-config-google": "^0.13.0",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-import": "^2.17.2",
